@@ -65,6 +65,7 @@ export default {
       this.transactions = transactionsResponse;
     } catch (err) {
       this.error = err;
+      alert("An error occurred while fetching the data");
     } finally {
       this.pending = false;
     }

@@ -58,6 +58,7 @@ export default {
         this.purchases = purchasesResponse;
       } catch (err) {
         this.error = err;
+        alert("An error occurred while fetching the data");
       } finally {
         this.pending = false;
       }

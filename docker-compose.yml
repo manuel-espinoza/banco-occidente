@@ -28,6 +28,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=bancooccidentedb;User Id=sa;Password=B4nc0d31sl4;
     ports:
       - "5020:80"
       - "7038:443"
