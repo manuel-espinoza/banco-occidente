@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    hostname: mssql-atl
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=B4nc0d31sl4
+      - MSSQL_PID=Developer
+      - MSSQL_BACKUP_DIR=/var/opt/mssql/backups
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./data/mssql/backups:/var/opt/mssql/backups
+      - ./data/mssql/data:/var/opt/mssql/data
+      - ./data/mssql/log:/var/opt/mssql/log
+      - ./bancooccidentedb.bak:/var/opt/mssql/backups/bancooccidentedb.bak
+    networks:
+      - app-network
+
+  webapi:
+    build:
+      context: ./BancoOccidenteAPI
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    ports:
+      - "5020:80"
+      - "7038:443"
+    depends_on:
+      - mssql
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./banco-occidente-frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - webapi
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "d76dbef6-3bf5-4e41-8f0f-01830617accf",
+		"name": "BancoOccidenteAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35061369"
+	},
+	"item": [
+		{
+			"name": "Obtener Cliente por Documento",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7038/api/Customers/GetByDocument?documentId=1234567890",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"api",
+						"Customers",
+						"GetByDocument"
+					],
+					"query": [
+						{
+							"key": "documentId",
+							"value": "1234567890"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener cabecera de estado de cuenta por cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7038/api/CreditCardStatement/GetHeaderInformation/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"api",
+						"CreditCardStatement",
+						"GetHeaderInformation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener compras del estado de cuenta x mes y cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7038/api/CreditCardStatement/GetPurchasesInformation/1/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"api",
+						"CreditCardStatement",
+						"GetPurchasesInformation",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener movimientos x mes x cc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7038/api/Transactions/GetTransactionsByCreditCard?creditCardNumber=4111111111111111&month=3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"api",
+						"Transactions",
+						"GetTransactionsByCreditCard"
+					],
+					"query": [
+						{
+							"key": "creditCardNumber",
+							"value": "4111111111111111"
+						},
+						{
+							"key": "month",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healht check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7038/health",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear transaccion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"transactionId\": 0,\r\n  \"creditCardId\": 1,\r\n  \"transactionDate\": \"2025-03-23\",\r\n  \"description\": \"Compra de lentes en CV +\",\r\n  \"amount\": 250,\r\n  \"transactionType\": \"cargo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7038/api/Transactions/CreateTransaction",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7038",
+					"path": [
+						"api",
+						"Transactions",
+						"CreateTransaction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
